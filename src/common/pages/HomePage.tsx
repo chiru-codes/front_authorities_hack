@@ -9,15 +9,13 @@ function HomePage() {
     return (
         <>
             <div
-                className="h-[75vh] flex items-center bg-cover bg-center bg-no-repeat"
-                style={{
-                    backgroundImage: `url(${utecphoto})`,
-                    filter: "brightness(40%)",
-                }}
+                className="relative h-[75vh] flex items-center bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: `url(${utecphoto})` }}
             >
+                <div className="absolute inset-0 bg-black/50"></div>
+
                 <div className="relative w-full py-26">
                     <section className="max-w-5xl mx-auto text-center text-white">
-
                         <div className="inline-flex items-center space-x-2 bg-yellow-500 text-black rounded-full px-4 py-2 mb-8">
                             <Bell className="w-4 h-4 animate-pulse" />
                             <span className="text-sm font-bold">
@@ -26,7 +24,7 @@ function HomePage() {
                         </div>
 
                         <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight drop-shadow-xl">
-                            <span className="text-sky-300text-sky-300">Reporta,</span>{" "}
+                            <span className="text-sky-300">Reporta,</span>{" "}
                             <span className="text-white">Monitorea,</span>{" "}
                             <span className="text-white">Resuelve</span>
                         </h1>
@@ -37,7 +35,6 @@ function HomePage() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-
                             <button
                                 onClick={() => navigate("/auth/login")}
                                 className="cursor-pointer group bg-sky-500 hover:bg-sky-600 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all flex items-center space-x-2 shadow-lg"
@@ -56,7 +53,6 @@ function HomePage() {
                     </section>
                 </div>
             </div>
-
             <CardSection />
         </>
     );
