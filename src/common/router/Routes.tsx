@@ -9,6 +9,7 @@ import ReportIncidentPage from "../pages/incidents/ReportIncidentPage";
 import DetailsIncidentPage from "../pages/incidents/DetailsIncidentPage.tsx";
 import DashboardIncidentPage from "../pages/incidents/DashboardIncidentPage.tsx";
 import FeedAdminPage from "../pages/admin/FeedAdminPage.tsx";
+import FeedSolverPage from "../pages/solver/FeedSolverPage.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -32,12 +33,16 @@ export const router = createBrowserRouter([
             {
                 element: <ProtectedRoute />,
                 children: [
+                    // USER - ADMIN - SOLVER
                     { path: "incidents/report", element: <ReportIncidentPage /> },
                     { path: "incidents/details/:id", element: <DetailsIncidentPage />},
                     { path: "incidents/dashboard", element: <DashboardIncidentPage />},
 
-                    // ADMIN - SOLVER
+                    // ADMIN
                     { path: "admin/feed", element: <FeedAdminPage />},
+
+                    // SOLVER
+                    { path: "solver/feed", element: <FeedSolverPage />},
                 ],
             },
         ],
