@@ -5,7 +5,6 @@ import utecphoto from "../../../public/assets/utecphoto.jpg";
 
 function HomePage() {
     const navigate = useNavigate();
-
     return (
         <>
             <div
