@@ -23,8 +23,8 @@ function HomePage() {
                         </div>
 
                         <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight drop-shadow-xl">
+                            <span className="text-sky-300text-sky-300">Reporta,</span>{" "}
                             <span className="text-white">Monitorea,</span>{" "}
-                            <span className="text-sky-300">Reporta,</span>{" "}
                             <span className="text-white">Resuelve</span>
                         </h1>
 
