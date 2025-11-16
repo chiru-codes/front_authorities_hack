@@ -1,4 +1,4 @@
-import LoginCard from "../components/loginpage/LoginCard";
+import LoginCard from "../../components/loginpage/LoginCard.tsx";
 
 function LoginPage() {
     return (

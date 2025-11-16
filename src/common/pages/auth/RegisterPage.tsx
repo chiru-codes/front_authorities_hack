@@ -1,4 +1,4 @@
-import RegisterCard from "../components/registerpage/RegisterCard.tsx";
+import RegisterCard from "../../components/registerpage/RegisterCard.tsx";
 
 function RegisterPage() {
     return(

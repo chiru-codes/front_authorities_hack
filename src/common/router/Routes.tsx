@@ -2,10 +2,13 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { PublicRoute } from "./PublicRoute";
 import App from "../../App";
-import LoginPage from "../pages/LoginPage"
-import RegisterPage from "../pages/RegisterPage";
-import HomePage from "../pages/HomePage";
+import LoginPage from "../pages/auth/LoginPage.tsx"
+import RegisterPage from "../pages/auth/RegisterPage.tsx";
+import HomePage from "../pages/HomePage.tsx";
 import ReportIncidentPage from "../pages/incidents/ReportIncidentPage";
+import DetailsIncidentPage from "../pages/incidents/DetailsIncidentPage.tsx";
+import DashboardIncidentPage from "../pages/incidents/DashboardIncidentPage.tsx";
+import FeedAdminPage from "../pages/admin/FeedAdminPage.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -17,7 +20,6 @@ export const router = createBrowserRouter([
                 element: <Navigate to="/home" replace />,
             },
 
-
             {
                 element: <PublicRoute />,
                 children: [
@@ -27,11 +29,15 @@ export const router = createBrowserRouter([
                 ],
             },
 
-
             {
                 element: <ProtectedRoute />,
                 children: [
                     { path: "incidents/report", element: <ReportIncidentPage /> },
+                    { path: "incidents/details/:id", element: <DetailsIncidentPage />},
+                    { path: "incidents/dashboard", element: <DashboardIncidentPage />},
+
+                    // ADMIN - SOLVER
+                    { path: "admin/feed", element: <FeedAdminPage />},
                 ],
             },
         ],

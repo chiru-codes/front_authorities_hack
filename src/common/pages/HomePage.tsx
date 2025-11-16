@@ -1,5 +1,5 @@
 import { Bell, ChevronRight } from "lucide-react";
-import CardSection from "../components/homepage/CardSection";
+import CardSection from "../components/homepage/CardSection.tsx";
 import { useNavigate } from "react-router-dom";
 import utecphoto from "../../../public/assets/utecphoto.jpg";
 
