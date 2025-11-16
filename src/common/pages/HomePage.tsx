@@ -1,6 +1,7 @@
 import { Bell, ChevronRight } from "lucide-react";
 import CardSection from "../components/homepage/CardSection";
 import { useNavigate } from "react-router-dom";
+import utecphoto from "../../../public/assets/utecphoto.jpg";
 
 function HomePage() {
     const navigate = useNavigate();
@@ -9,7 +10,7 @@ function HomePage() {
         <>
             <div
                 className="h-[75vh] flex items-center bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: "url('../../public/assets/utecphoto.jpg')" }}
+                style={{ backgroundImage: `url(${utecphoto})` }}
             >
                 <div className="w-full bg-black/50 py-26">
                     <section className="max-w-5xl mx-auto text-center text-white">
