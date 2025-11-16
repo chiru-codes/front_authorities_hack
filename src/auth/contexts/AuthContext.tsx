@@ -23,10 +23,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         data: LoginRequestDTO
     ): ResultAsync<AuthResponseDTO, Error> => {
         return login(data).map((res) => {
-            // res = { token, session_id }
             localStorage.setItem("token", res.token);
             setSession(res.token);
-            return res; // devolvemos el AuthResponseDTO
+            return res;
         });
     };
 
