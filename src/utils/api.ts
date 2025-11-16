@@ -2,6 +2,8 @@ import { ResultAsync } from "neverthrow";
 
 const API_URL = import.meta.env.VITE_API_URL as string;
 
+const getToken = () => localStorage.getItem("token") ?? "";
+
 export function wrap<T>(promise: Promise<T>): ResultAsync<T, Error> {
     return ResultAsync.fromPromise(promise, (err) =>
         err instanceof Error ? err : new Error("Error inesperado")
@@ -13,7 +15,10 @@ export const apiClient = {
         wrap(
             fetch(`${API_URL}${path}`, {
                 method: "GET",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${getToken()}`,
+                },
             }).then(async (res) => {
                 if (!res.ok) throw new Error(await res.text());
                 return res.json() as Promise<T>;
@@ -24,7 +29,10 @@ export const apiClient = {
         wrap(
             fetch(`${API_URL}${path}`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${getToken()}`,
+                },
                 body: JSON.stringify(body),
             }).then(async (res) => {
                 if (!res.ok) throw new Error(await res.text());
@@ -36,7 +44,10 @@ export const apiClient = {
         wrap(
             fetch(`${API_URL}${path}`, {
                 method: "PATCH",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${getToken()}`,
+                },
                 body: JSON.stringify(body),
             }).then(async (res) => {
                 if (!res.ok) throw new Error(await res.text());

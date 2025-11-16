@@ -4,11 +4,13 @@ import type { ChangeEvent, FormEvent } from "react";
 
 function ReportIncidentPage() {
     const navigate = useNavigate();
+
     const [form, setForm] = useState({
         category: "",
         place_id: "",
         description: "",
     });
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
