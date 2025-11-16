@@ -10,8 +10,8 @@ export interface LoginResponse {
     session_id: string;
 }
 
-const BASE_URL = import.meta.env.VITE_API_URL;
-
+//const BASE_URL = import.meta.env.VITE_API_URL;
+const BASE_URL = "https://fi7faricwd.execute-api.us-east-1.amazonaws.com"
 export function login(req: LoginRequest) {
     return ResultAsync.fromPromise(
         fetch(`${BASE_URL}/auth/login`, {
