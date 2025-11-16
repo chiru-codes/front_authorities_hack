@@ -10,9 +10,12 @@ function HomePage() {
         <>
             <div
                 className="h-[75vh] flex items-center bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: `url(${utecphoto})` }}
+                style={{
+                    backgroundImage: `url(${utecphoto})`,
+                    filter: "brightness(40%)",
+                }}
             >
-                <div className="w-full bg-black/50 py-26">
+                <div className="relative w-full py-26">
                     <section className="max-w-5xl mx-auto text-center text-white">
 
                         <div className="inline-flex items-center space-x-2 bg-yellow-500 text-black rounded-full px-4 py-2 mb-8">
