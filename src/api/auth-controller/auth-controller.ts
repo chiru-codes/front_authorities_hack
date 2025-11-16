@@ -1,4 +1,4 @@
-import { wrap } from "../../utils/api";
+import { ResultAsync } from "neverthrow";
 
 export interface LoginRequest {
     user_id: string;
@@ -11,47 +11,26 @@ export interface LoginResponse {
 }
 
 const BASE_URL = import.meta.env.VITE_API_URL;
-if (!BASE_URL) {
-    console.error("VITE_API_URL no está definido");
-}
 
-export async function login(req: LoginRequest) {
-    if (!req.user_id || !req.password) {
-        throw new Error("Faltan credenciales");
-    }
-
-    const cleanReq: any = {
-        user_id: req.user_id.trim(),
-        password: req.password,
-    };
-
-    return wrap(
+export function login(req: LoginRequest) {
+    return ResultAsync.fromPromise(
         fetch(`${BASE_URL}/auth/login`, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(cleanReq),
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(req),
         }).then(async (res) => {
             const text = await res.text();
 
             if (!res.ok) {
                 let msg = text;
-
                 try {
-                    const parsed = JSON.parse(text);
-                    msg = parsed?.message ?? msg;
-                } catch { }
-
-                throw new Error(`Login failed: ${msg}`);
+                    msg = JSON.parse(text)?.message ?? msg;
+                } catch {}
+                throw new Error(msg);
             }
 
-            try {
-                return JSON.parse(text) as LoginResponse;
-            } catch (err) {
-                console.error("Error parsing login response:", err);
-                throw new Error("Respuesta inválida del servidor");
-            }
-        })
+            return JSON.parse(text) as LoginResponse;
+        }),
+        (err) => err as Error
     );
 }
