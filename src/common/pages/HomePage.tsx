@@ -1,6 +1,6 @@
 import { Bell, ChevronRight, FileText } from "lucide-react";
-import CardSection from "../components/homepage/CardSection.tsx";
-import IncidentsTable from "../components/homepage/IncidentsTable.tsx";
+import CardSection from "../components/homepage/CardSection";
+import IncidentsTable from "../components/homepage/IncidentsTable";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import utecphoto from "../../../public/assets/utecphoto.jpg";
@@ -27,8 +27,7 @@ function HomePage() {
         }
     }, []);
 
-    //const BASE_URL = import.meta.env.VITE_API_URL;
-    const BASE_URL = "https://qzkbh4dev6.execute-api.us-east-1.amazonaws.com";
+    const BASE_URL = import.meta.env.VITE_API_URL;
 
 
     const fetchIncidents = async (token: string) => {
