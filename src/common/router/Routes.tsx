@@ -21,12 +21,14 @@ export const router = createBrowserRouter([
                 element: <Navigate to="/home" replace />,
             },
 
+            // Home accesible siempre (logueado o no)
+            { path: "home", element: <HomePage /> },
+
             {
                 element: <PublicRoute />,
                 children: [
                     { path: "auth/login", element: <LoginPage /> },
                     { path: "auth/register", element: <RegisterPage /> },
-                    { path: "home", element: <HomePage /> },
                 ],
             },
 

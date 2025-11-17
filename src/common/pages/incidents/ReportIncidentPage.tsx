@@ -7,7 +7,7 @@ function ReportIncidentPage() {
 
     const [form, setForm] = useState({
         category: "",
-        place_id: "",
+        place: "",
         description: "",
     });
 
@@ -25,9 +25,11 @@ function ReportIncidentPage() {
         setLoading(true);
         setError(null);
 
+        //const BASE_URL = import.meta.env.VITE_API_URL;
+        const BASE_URL = "https://qzkbh4dev6.execute-api.us-east-1.amazonaws.com";
         try {
             const res = await fetch(
-                `${import.meta.env.VITE_API_URL}/incidents`,
+                `${BASE_URL}/incidents`,
                 {
                     method: "POST",
                     headers: {
@@ -79,8 +81,8 @@ function ReportIncidentPage() {
                     <label className="block text-gray-700 font-medium mb-1">Lugar / Ubicación</label>
                     <input
                         type="text"
-                        name="place_id"
-                        value={form.place_id}
+                        name="place"
+                        value={form.place}
                         onChange={handleChange}
                         className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
                         required

@@ -1,10 +1,94 @@
-import { Bell, ChevronRight } from "lucide-react";
+import { Bell, ChevronRight, FileText } from "lucide-react";
 import CardSection from "../components/homepage/CardSection.tsx";
+import IncidentsTable from "../components/homepage/IncidentsTable.tsx";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import utecphoto from "../../../public/assets/utecphoto.jpg";
+
+type Incident = {
+  incident_id: string;
+  category: string;
+  place_id?: string;
+  description?: string;
+  created_at?: string;
+};
 
 function HomePage() {
     const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [incidents, setIncidents] = useState<Incident[]>([]);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            setIsLoggedIn(true);
+            fetchIncidents(token);
+        }
+    }, []);
+
+    //const BASE_URL = import.meta.env.VITE_API_URL;
+    const BASE_URL = "https://qzkbh4dev6.execute-api.us-east-1.amazonaws.com";
+
+
+    const fetchIncidents = async (token: string) => {
+        setLoading(true);
+        try {
+            const res = await fetch(`${BASE_URL}/incidents`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            if (res.ok) {
+                const data = await res.json();
+                setIncidents(data.incidents || data || []);
+            }
+        } catch (err) {
+            console.error("Error fetching incidents:", err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const graveIncidents = incidents.filter((i) => (i.category || "").toUpperCase() === "GRAVE");
+    const otherIncidents = incidents.filter((i) => (i.category || "").toUpperCase() !== "GRAVE");
+
+    if (isLoggedIn) {
+        return (
+            <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 p-6">
+                <div className="max-w-7xl mx-auto space-y-6">
+                    {/* Header con botón de reportar */}
+                    <div className="flex items-center justify-between">
+                        <h1 className="text-3xl font-bold text-gray-800">Inicio</h1>
+                        <button
+                            onClick={() => navigate("/incidents/report")}
+                            className="bg-sky-500 hover:bg-sky-600 text-white px-6 py-3 rounded-xl font-semibold flex items-center gap-2 shadow-lg transition"
+                        >
+                            <FileText className="w-5 h-5" />
+                            Reportar Incidente
+                        </button>
+                    </div>
+
+                    {loading && <p className="text-center text-gray-500">Cargando incidentes...</p>}
+
+                    {/* Tabla de Incidentes Graves (azul) */}
+                    <IncidentsTable
+                        title="Incidentes Graves"
+                        incidents={graveIncidents}
+                        borderColor="border-blue-500"
+                        textColor="text-blue-700"
+                    />
+
+                    {/* Tabla de Otros Incidentes (celeste) */}
+                    <IncidentsTable
+                        title="Incidentes"
+                        incidents={otherIncidents}
+                        borderColor="border-sky-400"
+                        textColor="text-sky-700"
+                    />
+                </div>
+            </div>
+        );
+    }
+
     return (
         <>
             <div
