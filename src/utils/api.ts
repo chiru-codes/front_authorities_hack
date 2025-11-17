@@ -1,7 +1,6 @@
 import { ResultAsync } from "neverthrow";
 
-//const API_URL = import.meta.env.VITE_API_URL as string;
-const API_URL = "https://qzkbh4dev6.execute-api.us-east-1.amazonaws.com";
+const API_URL = import.meta.env.VITE_API_URL as string;
 const getToken = () => localStorage.getItem("token") ?? "";
 
 export function wrap<T>(promise: Promise<T>): ResultAsync<T, Error> {
